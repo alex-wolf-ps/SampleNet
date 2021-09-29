@@ -25,12 +25,12 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           enable-AzPSSession: true
       
-      #- name: Azure CLI script
-      #  uses: azure/CLI@v1
-      #  with:
-      #    #azcliversion: 2.0.72
-      #    inlineScript: |
-      #      az webapp create -p basic -g alexwolfpspicasso -n blah634233423
+      - name: Azure CLI script
+        uses: azure/CLI@v1
+        with:
+          #azcliversion: 2.0.72
+          inlineScript: |
+            az webapp create -p basic -g alexwolfpspicasso -n ${GITHUB_REF##*/}
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
@@ -76,7 +76,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'blah634233423'
+          app-name: ${GITHUB_REF##*/}
           slot-name: 'Production'
           #publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F38EB79D802E4FF2BF9C7226BF293B70 }}
           package: .
