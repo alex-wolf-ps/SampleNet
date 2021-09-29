@@ -7,6 +7,7 @@ on:
   push:
     ##branches:
       ##- main
+      if: ${{contains(github.ref, 'main*')}}
   workflow_dispatch:
 
 jobs:
@@ -24,13 +25,21 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           enable-AzPSSession: true
+
+      #- name: Set variable
+      #  env:
+      #    PUB_PROFILE: az webapp deployment list-publishing-profiles --name blah634233423 --resource-group alexwolfpspicasso
       
       - name: Azure CLI script
         uses: azure/CLI@v1
         with:
           #azcliversion: 2.0.72
           inlineScript: |
-            az webapp create -p basic -g alexwolfpspicasso -n blah634233423
+            export PUBPROFILE=az webapp deployment list-publishing-profiles --name blah634233423 --resource-group alexwolfpspicasso
+          #az webapp create -p basic -g alexwolfpspicasso -n blah634233423
+
+      - name: Print list
+        run: echo PUBPROFILE
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
@@ -73,5 +82,6 @@ jobs:
           #app-name: 'testingactions'
           app-name: 'blah634233423'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F38EB79D802E4FF2BF9C7226BF293B70 }}
+          #publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F38EB79D802E4FF2BF9C7226BF293B70 }}
+          public-profile: ${PUBPROFILE}
           package: .
