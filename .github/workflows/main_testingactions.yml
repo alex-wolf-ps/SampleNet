@@ -34,7 +34,7 @@ jobs:
         with:
           #azcliversion: 2.0.72
           inlineScript: |
-            PUBPROFILE=$(az webapp deployment list-publishing-profiles --name blah634233423 --resource-group alexwolfpspicasso);echo $PUBPROFILE
+            PUBPROFILE=$(az webapp deployment list-publishing-profiles --name blah634233423 --resource-group alexwolfpspicasso --output tsv);echo $PUBPROFILE
             
           #az webapp create -p basic -g alexwolfpspicasso -n blah634233423
 
