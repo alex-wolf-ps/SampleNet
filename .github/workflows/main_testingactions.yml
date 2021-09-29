@@ -5,8 +5,6 @@ name: Build and deploy ASP.Net Core app to Azure Web App - testingactions
 
 on:
   push:
-    ##branches:
-      ##- main
   workflow_dispatch:
 
 jobs:
@@ -25,12 +23,11 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           enable-AzPSSession: true
       
-      #- name: Azure CLI script
-      #  uses: azure/CLI@v1
-      #  with:
-      #    #azcliversion: 2.0.72
-      #    inlineScript: |
-      #      az webapp create -p basic -g alexwolfpspicasso -n ${GITHUB_REF##*/}
+      - name: Azure CLI script
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+              az webapp create -p basic -g alexwolfpspicasso -n ${GITHUB_REF##*/}
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
@@ -61,8 +58,6 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - uses: actions/checkout@v2
-
       - name: Branch name
         run: echo running on branch ${GITHUB_REF##*/}
 
