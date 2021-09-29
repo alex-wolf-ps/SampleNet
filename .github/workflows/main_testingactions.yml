@@ -34,7 +34,8 @@ jobs:
         with:
           #azcliversion: 2.0.72
           inlineScript: |
-            PUBPROFILE=$(az webapp deployment list-publishing-profiles --name blah634233423 --resource-group alexwolfpspicasso)
+            PUBPROFILE=$(az webapp deployment list-publishing-profiles --name blah634233423 --resource-group alexwolfpspicasso);echo $PUBPROFILE
+            
           #az webapp create -p basic -g alexwolfpspicasso -n blah634233423
 
       - name: Print list
@@ -82,5 +83,5 @@ jobs:
           app-name: 'blah634233423'
           slot-name: 'Production'
           #publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F38EB79D802E4FF2BF9C7226BF293B70 }}
-          public-profile: $PUBPROFILE
+          publish-profile: $PUBPROFILE
           package: .
