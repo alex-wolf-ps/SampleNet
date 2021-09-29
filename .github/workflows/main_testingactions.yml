@@ -56,15 +56,15 @@ jobs:
   #  environment:
   #    name: 'Production'
   #    url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-#
-  #  steps:
-      - name: Branch name
-        run: echo running on branch ${GITHUB_REF##*/}
+  #
+  #steps:
+  #- name: Branch name
+  #  run: echo running on branch ${GITHUB_REF##*/}
 
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v2
-        with:
-          name: .net-app
+  #- name: Download artifact from build job
+  #  uses: actions/download-artifact@v2
+  #  with:
+  #    name: .net-app
 
       - name: Azure Login
         uses: azure/login@v1
