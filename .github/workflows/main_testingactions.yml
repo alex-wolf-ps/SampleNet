@@ -5,9 +5,8 @@ name: Build and deploy ASP.Net Core app to Azure Web App - testingactions
 
 on:
   push:
-    ##branches:
-      ##- main
-      if: ${{contains(github.ref, 'main*')}}
+    branches:
+      main
   workflow_dispatch:
 
 jobs:
