@@ -25,12 +25,12 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           enable-AzPSSession: true
       
-      - name: Azure CLI script
-        uses: azure/CLI@v1
-        with:
-          #azcliversion: 2.0.72
-          inlineScript: |
-            az webapp create -p basic -g alexwolfpspicasso -n blah634233423
+      #- name: Azure CLI script
+      #  uses: azure/CLI@v1
+      #  with:
+      #    #azcliversion: 2.0.72
+      #    inlineScript: |
+      #      az webapp create -p basic -g alexwolfpspicasso -n blah634233423
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
@@ -66,6 +66,12 @@ jobs:
         with:
           name: .net-app
 
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          enable-AzPSSession: true
+      
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
