@@ -23,13 +23,14 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+          enable-AzPSSession: true
       
       - name: Azure CLI script
         uses: azure/CLI@v1
         with:
           #azcliversion: 2.0.72
           inlineScript: |
-            az webapp list
+            az webapp create -p basic -g alexwolfpspicasso -n blah634233423
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
