@@ -23,7 +23,7 @@ jobs:
           start: '19'
 
       - name: print branch
-        run: echo ${{ steps.branch-ref.outputs.substring }}"
+        run: echo ${{ steps.branch-ref.outputs.result }}"
 
       - name: Azure Login
         uses: azure/login@v1
@@ -36,7 +36,7 @@ jobs:
         with:
           azcliversion: 2.0.72
           inlineScript: |
-              az webapp create -p basic -g alexwolfpspicasso -n ${{ steps.branch-ref.outputs.substring }}"
+              az webapp create -p basic -g alexwolfpspicasso -n ${{ steps.branch-ref.outputs.result }}"
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
@@ -63,6 +63,6 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ steps.branch-ref.outputs.substring }}"
+          app-name: ${{ steps.branch-ref.outputs.result }}"
           slot-name: 'Production'
           package: ${{env.DOTNET_ROOT}}/myapp
