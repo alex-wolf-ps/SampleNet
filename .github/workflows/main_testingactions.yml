@@ -16,14 +16,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: web3j/substr-action@v1.2
-        id: branch-ref
+      - uses: bhowell2/github-substring-action
+        id: branchref
         with:
           value: ${{ github.ref }}
-          start: '19'
+          length_from_start: 19
 
       - name: print branch
-        run: echo ${{ steps.branch-ref.outputs.result }}"
+        run: echo ${{ steps.branchref.outputs.substring }}"
 
       - name: Azure Login
         uses: azure/login@v1
@@ -36,7 +36,7 @@ jobs:
         with:
           azcliversion: 2.0.72
           inlineScript: |
-              az webapp create -p basic -g alexwolfpspicasso -n ${{ steps.branch-ref.outputs.result }}"
+              az webapp create -p basic -g alexwolfpspicasso -n ${{ steps.branchref.outputs.substring }}"
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
@@ -63,6 +63,6 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ steps.branch-ref.outputs.result }}"
+          app-name: ${{ steps.branchref.outputs.substring }}"
           slot-name: 'Production'
           package: ${{env.DOTNET_ROOT}}/myapp
