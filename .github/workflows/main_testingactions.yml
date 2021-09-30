@@ -16,11 +16,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: bhowell2/github-substring-action@v1.0.0
+      - uses: web3j/substr-action@v1.2
         id: branch-ref
         with:
           value: ${{ github.ref }}
-          index_of_str: "refs/heads/feature/"
+          start: '19'
 
       - name: print branch
         run: echo ${{ steps.branch-ref.outputs.substring }}"
@@ -34,6 +34,7 @@ jobs:
       - name: Azure CLI script
         uses: azure/CLI@v1
         with:
+          azcliversion: 2.0.72
           inlineScript: |
               az webapp create -p basic -g alexwolfpspicasso -n ${{ steps.branch-ref.outputs.substring }}"
 
