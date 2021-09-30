@@ -63,6 +63,6 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ steps.branchref.outputs.substring }}"
+          app-name: ${{ steps.branchref.outputs.substring }}
           slot-name: 'Production'
           package: ${{env.DOTNET_ROOT}}/myapp
