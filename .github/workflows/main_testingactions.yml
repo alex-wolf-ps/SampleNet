@@ -15,10 +15,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      
-      - name: Branch name
-        run:  echo '::set-output name=BRANCH::${{ github.ref }}'
+
+      - uses: bhowell2/github-substring-action@v1.0.0
         id: branch-ref
+        with:
+          value: ${{ github.ref }}
+          index_of_str: "refs/heads/feature/"
 
       - name: Azure Login
         uses: azure/login@v1
