@@ -19,7 +19,7 @@ jobs:
       - uses: bhowell2/github-substring-action
         id: branchref
         with:
-          value: ${{ github.ref }}
+          value: "${{ github.ref }}"
           length_from_start: 19
 
       - name: print branch
