@@ -16,10 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: bhowell2/github-substring-action
+      - uses: bhowell2/github-substring-action@v1.0.0
         id: branchref
         with:
-          value: "${{ github.ref }}"
+          value: ${{ github.ref }}
           length_from_start: 19
 
       - name: print branch
