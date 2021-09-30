@@ -32,7 +32,7 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
-              az webapp create -p basic -g alexwolfpspicasso -n ${{ steps.branch-ref.outputs.BRANCH }}"
+              az webapp create -p basic -g alexwolfpspicasso -n ${{ steps.branch-ref.outputs.substring }}"
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
@@ -59,6 +59,6 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ steps.branch-ref.outputs.BRANCH }}"
+          app-name: ${{ steps.branch-ref.outputs.substring }}"
           slot-name: 'Production'
           package: ${{env.DOTNET_ROOT}}/myapp
