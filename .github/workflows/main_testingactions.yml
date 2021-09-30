@@ -20,7 +20,7 @@ jobs:
         id: branchref
         with:
           value: ${{ github.ref }}
-          length_from_start: 19
+          index_of_str: "refs/heads/feature/"
 
       - name: print branch
         run: echo ${{ steps.branchref.outputs.substring }}
