@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -21,6 +21,9 @@ jobs:
         with:
           value: ${{ github.ref }}
           index_of_str: "refs/heads/feature/"
+
+      - name: print branch
+        run: echo ${{ steps.branch-ref.outputs.substring }}"
 
       - name: Azure Login
         uses: azure/login@v1
