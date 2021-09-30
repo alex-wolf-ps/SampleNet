@@ -23,7 +23,7 @@ jobs:
           length_from_start: 19
 
       - name: print branch
-        run: echo ${{ steps.branchref.outputs.substring }}"
+        run: echo ${{ steps.branchref.outputs.substring }}
 
       - name: Azure Login
         uses: azure/login@v1
